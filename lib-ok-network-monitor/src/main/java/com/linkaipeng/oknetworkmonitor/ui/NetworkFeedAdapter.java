@@ -12,6 +12,8 @@ import com.facebook.stetho.okhttp3.R;
 import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl;
 import com.linkaipeng.oknetworkmonitor.data.NetworkFeedModel;
 
+import java.text.DecimalFormat;
+import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +44,20 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
         ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
         final NetworkFeedModel networkFeedModel = mNetworkFeedList.get(i);
         itemViewHolder.mUrlTextView.setText("Url:" + networkFeedModel.getUrl());
+
+        if (networkFeedModel.getStatus() >= 400 && networkFeedModel.getStatus() <= 600) {
+            itemViewHolder.mStatusView.setBackgroundResource(R.drawable.red_rect);
+            itemViewHolder.mStatusCodeTextView.setTextColor(mContext.getResources().getColor(R.color.red));
+        } else {
+            itemViewHolder.mStatusView.setBackgroundResource(R.drawable.green_rect);
+            itemViewHolder.mStatusCodeTextView.setTextColor(mContext.getResources().getColor(R.color.green));
+        }
         itemViewHolder.mStatusCodeTextView.setText("StatusCode: "+networkFeedModel.getStatus());
-        String dataSize = "Size: " + networkFeedModel.getSize() * 0.001 + "Kb";
+
+        Format format = new DecimalFormat("#.00");
+        String dataSize = "Size: " + format.format(networkFeedModel.getSize() * 0.001) + " KB";
         itemViewHolder.mSizeTextView.setText(dataSize);
+        itemViewHolder.mCostTimeTextView.setText("CostTime: " + networkFeedModel.getCostTime() + " ms");
         itemViewHolder.mRootLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,18 +71,14 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
         return mNetworkFeedList.size();
     }
 
-    public void notifyAndUpdateData() {
-        mNetworkFeedList.clear();
-        mNetworkFeedList.addAll(DataPoolImpl.getInstance().getNetworkFeedMap().values());
-        notifyDataSetChanged();
-    }
-
     private static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private LinearLayout mRootLayout;
         private TextView mUrlTextView;
         private TextView mStatusCodeTextView;
         private TextView mSizeTextView;
+        private TextView mCostTimeTextView;
+        private View mStatusView;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
@@ -77,6 +86,8 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
             mUrlTextView = itemView.findViewById(R.id.item_network_feed_url_textView);
             mStatusCodeTextView = itemView.findViewById(R.id.item_network_feed_status_textView);
             mSizeTextView = itemView.findViewById(R.id.item_network_feed_size_textView);
+            mCostTimeTextView = itemView.findViewById(R.id.item_network_feed_cost_time_textView);
+            mStatusView = itemView.findViewById(R.id.item_network_feed_status_view);
         }
     }
 }
