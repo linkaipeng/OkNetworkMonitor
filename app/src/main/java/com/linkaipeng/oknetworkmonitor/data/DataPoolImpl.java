@@ -55,4 +55,23 @@ public class DataPoolImpl implements IDataPoolHandle {
             mNetworkFeedMap.remove(key);
         }
     }
+
+    @Override
+    public WeakHashMap<String, NetworkFeedModel> getNetworkFeedMap() {
+        return mNetworkFeedMap;
+    }
+
+    @Override
+    public NetworkFeedModel getNetworkFeedModel(String requestId) {
+        if (mNetworkFeedMap == null) {
+            initDataPool();
+        }
+        NetworkFeedModel networkFeedModel = mNetworkFeedMap.get(requestId);
+        if (networkFeedModel == null) {
+            networkFeedModel = new NetworkFeedModel();
+            networkFeedModel.setRequestId(requestId);
+            mNetworkFeedMap.put(requestId, networkFeedModel);
+        }
+        return networkFeedModel;
+    }
 }

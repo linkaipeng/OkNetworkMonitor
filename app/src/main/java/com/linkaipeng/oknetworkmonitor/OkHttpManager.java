@@ -1,6 +1,6 @@
 package com.linkaipeng.oknetworkmonitor;
 
-import com.facebook.stetho.okhttp3.MyStethoInterceptor;
+import com.linkaipeng.oknetworkmonitor.reporter.MyStethoInterceptor;
 
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;

@@ -1,12 +1,19 @@
-package com.facebook.stetho.okhttp3;
+package com.linkaipeng.oknetworkmonitor.reporter;
 
 import android.util.Log;
 
-
 import com.facebook.stetho.okhttp3.stetho.NetworkEventReporter;
 import com.facebook.stetho.okhttp3.stetho.ResponseHandler;
+import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl;
+import com.linkaipeng.oknetworkmonitor.data.NetworkFeedModel;
+import com.linkaipeng.oknetworkmonitor.utils.DataTranslator;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Nullable;
@@ -19,7 +26,7 @@ public class OkNetworkReporterImpl implements NetworkEventReporter {
 
     private static final String TAG = "OkNetworkReporterImpl";
     private final AtomicInteger mNextRequestId = new AtomicInteger(0);
-    private long mStartTime;
+    private Map<String, Long> mStartTimeMap = new HashMap();
 
     private static OkNetworkReporterImpl sInstance;
 
@@ -44,14 +51,25 @@ public class OkNetworkReporterImpl implements NetworkEventReporter {
                 .append("\nheaderCount = ").append(request.headerCount())
                 .append("\nfriendlyName = ").append(request.friendlyName());
         Log.d(TAG, "requestBuilder = "+requestBuilder.toString());
-        mStartTime = System.currentTimeMillis();
+
+        DataTranslator.saveInspectorRequest(request);
+        mStartTimeMap.put(request.id(), System.currentTimeMillis());
     }
 
     @Override
     public void responseHeadersReceived(InspectorResponse response) {
         Log.d(TAG, "responseHeadersReceived");
-        long costTime = System.currentTimeMillis() - mStartTime;
-        Log.d(TAG, "cost time = " + costTime + "ms");
+        String requestId = response.requestId();
+        long costTime;
+        if (mStartTimeMap.containsKey(requestId)) {
+            costTime = System.currentTimeMillis() - mStartTimeMap.get(requestId);
+            Log.d(TAG, "cost time = " + costTime + "ms");
+        } else {
+            costTime = -1;
+        }
+        NetworkFeedModel networkFeedModel = DataPoolImpl.getInstance().getNetworkFeedModel(requestId);
+        networkFeedModel.setCostTime(costTime);
+        networkFeedModel.setStatus(response.statusCode());
     }
 
     @Override
@@ -63,7 +81,16 @@ public class OkNetworkReporterImpl implements NetworkEventReporter {
     @Override
     public InputStream interpretResponseStream(String requestId, @Nullable String contentType, @Nullable String contentEncoding, @Nullable InputStream inputStream, ResponseHandler responseHandler) {
         Log.d(TAG, "interpretResponseStream");
-        return null;
+        NetworkFeedModel networkFeedModel = DataPoolImpl.getInstance().getNetworkFeedModel(requestId);
+        networkFeedModel.setContentType(contentType);
+        ByteArrayOutputStream byteArrayOutputStream = DataTranslator.parseAndSaveBody(inputStream, networkFeedModel);
+        InputStream newInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+        try {
+            byteArrayOutputStream.close();
+        } catch (IOException e) {
+            Log.e(TAG, TAG, e);
+        }
+        return newInputStream;
     }
 
     @Override
