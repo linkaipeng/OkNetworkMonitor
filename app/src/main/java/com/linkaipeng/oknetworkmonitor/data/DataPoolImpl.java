@@ -1,6 +1,6 @@
 package com.linkaipeng.oknetworkmonitor.data;
 
-import java.util.WeakHashMap;
+import java.util.HashMap;
 
 /**
  * Created by linkaipeng on 2018/5/17.
@@ -9,7 +9,7 @@ import java.util.WeakHashMap;
 public class DataPoolImpl implements IDataPoolHandle {
 
     private static DataPoolImpl sDataPoolImpl;
-    private WeakHashMap<String, NetworkFeedModel> mNetworkFeedMap;
+    private HashMap<String, NetworkFeedModel> mNetworkFeedMap;
 
     public static DataPoolImpl getInstance() {
         if (sDataPoolImpl == null) {
@@ -25,7 +25,7 @@ public class DataPoolImpl implements IDataPoolHandle {
     @Override
     public void initDataPool() {
         if (mNetworkFeedMap == null) {
-            mNetworkFeedMap = new WeakHashMap();
+            mNetworkFeedMap = new HashMap();
         }
         mNetworkFeedMap.clear();
     }
@@ -57,7 +57,7 @@ public class DataPoolImpl implements IDataPoolHandle {
     }
 
     @Override
-    public WeakHashMap<String, NetworkFeedModel> getNetworkFeedMap() {
+    public HashMap<String, NetworkFeedModel> getNetworkFeedMap() {
         return mNetworkFeedMap;
     }
 

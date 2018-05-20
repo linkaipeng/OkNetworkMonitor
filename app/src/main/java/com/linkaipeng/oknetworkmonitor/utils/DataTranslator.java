@@ -63,7 +63,9 @@ public class DataTranslator {
             while ((line = bufferedReader.readLine()) != null) {
                 bodyBuilder.append(line + '\n');
             }
-            networkFeedModel.setBody(bodyBuilder.toString());
+            String body = bodyBuilder.toString();
+            networkFeedModel.setBody(body);
+            networkFeedModel.setSize(body.getBytes().length);
         } catch (IOException e) {
             Log.e(TAG, TAG, e);
         }
