@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.NetworkFeedActivity"
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -23,8 +23,13 @@
         </activity>
 
         <activity
-            android:name=".ui.NetworkFeedDetailActivity"
+            android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedDetailActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

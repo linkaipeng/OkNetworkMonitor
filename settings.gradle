@@ -1,1 +1,1 @@
-include ':app', 'stetho-okhttp3'
+include ':app', 'lib-ok-network-monitor'
