@@ -5,9 +5,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
+    android:background="@color/dark_gray"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:layout_marginTop="10dp">
 
     <View
@@ -15,6 +15,7 @@
         android:layout_width="5dp"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -41,7 +42,7 @@
             android:id="@+id/item_network_feed_url_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_gray"
+            android:textColor="@color/white"
             android:textSize="18sp"
             android:text="Url: http://www.xxxx.com"
             android:layout_marginBottom="5dp"/>
@@ -50,7 +51,7 @@
             android:id="@+id/item_network_feed_size_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/light_gray"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:text="Size: 900 KB"
             android:layout_marginBottom="5dp"/>
@@ -59,7 +60,7 @@
             android:id="@+id/item_network_feed_cost_time_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/light_gray"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:text="CostTime: 900 ms"
             android:layout_marginBottom="5dp"/>
