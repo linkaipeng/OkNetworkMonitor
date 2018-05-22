@@ -13,7 +13,7 @@ public class NetworkFeedModel implements Serializable {
     private String mUrl;
     private String mHost;
     private String mMethod;
-    private Map<String, String> mHeadersMap;
+    private Map<String, String> mRequestHeadersMap;
 
     private String mName;
     private int mStatus;
@@ -21,6 +21,7 @@ public class NetworkFeedModel implements Serializable {
     private long mCostTime;
     private String mContentType;
     private String mBody;
+    private Map<String, String> mResponseHeadersMap;
 
     public String getRequestId() {
         return mRequestId;
@@ -54,12 +55,12 @@ public class NetworkFeedModel implements Serializable {
         mMethod = method;
     }
 
-    public Map<String, String> getHeadersMap() {
-        return mHeadersMap;
+    public Map<String, String> getRequestHeadersMap() {
+        return mRequestHeadersMap;
     }
 
-    public void setHeadersMap(Map<String, String> headersMap) {
-        mHeadersMap = headersMap;
+    public void setRequestHeadersMap(Map<String, String> requestHeadersMap) {
+        mRequestHeadersMap = requestHeadersMap;
     }
 
     public String getName() {
@@ -110,6 +111,14 @@ public class NetworkFeedModel implements Serializable {
         mBody = body;
     }
 
+    public Map<String, String> getResponseHeadersMap() {
+        return mResponseHeadersMap;
+    }
+
+    public void setResponseHeadersMap(Map<String, String> responseHeadersMap) {
+        mResponseHeadersMap = responseHeadersMap;
+    }
+
     @Override
     public String toString() {
         return "NetworkFeedModel{" +
@@ -117,13 +126,14 @@ public class NetworkFeedModel implements Serializable {
                 ", mUrl='" + mUrl + '\'' +
                 ", mHost='" + mHost + '\'' +
                 ", mMethod='" + mMethod + '\'' +
-                ", mHeadersMap=" + mHeadersMap +
+                ", mRequestHeadersMap=" + mRequestHeadersMap +
                 ", mName='" + mName + '\'' +
                 ", mStatus=" + mStatus +
                 ", mSize=" + mSize +
                 ", mCostTime=" + mCostTime +
                 ", mContentType='" + mContentType + '\'' +
                 ", mBody='" + mBody + '\'' +
+                ", mResponseHeadersMap=" + mResponseHeadersMap +
                 '}';
     }
 }

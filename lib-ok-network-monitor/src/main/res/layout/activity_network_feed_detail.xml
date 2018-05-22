@@ -10,25 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:paddingTop="15dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="15dp"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:textColor="@color/white"
+            style="@style/DetailTitle"
+            android:text="Request Headers"/>
+
+        <TextView
+            android:id="@+id/request_headers_textView"
+            style="@style/DetailContent"/>
+
+        <TextView
+            style="@style/DetailTitle"
+            android:text="Response Headers"/>
+
+        <TextView
+            android:id="@+id/response_headers_textView"
+            style="@style/DetailContent"/>
+
+        <TextView
+            style="@style/DetailTitle"
             android:text="Response"/>
 
         <TextView
             android:id="@+id/body_textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="16sp"/>
+            style="@style/DetailContent"/>
 
     </LinearLayout>
 

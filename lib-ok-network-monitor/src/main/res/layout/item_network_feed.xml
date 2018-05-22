@@ -48,6 +48,15 @@
             android:layout_marginBottom="5dp"/>
 
         <TextView
+            android:id="@+id/item_network_feed_method_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="Method: GET"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
             android:id="@+id/item_network_feed_size_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,6 +72,15 @@
             android:textColor="@color/white"
             android:textSize="15sp"
             android:text="CostTime: 900 ms"
+            android:layout_marginBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/item_network_feed_content_type_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:text="ContentType: json"
             android:layout_marginBottom="5dp"/>
 
     </LinearLayout>

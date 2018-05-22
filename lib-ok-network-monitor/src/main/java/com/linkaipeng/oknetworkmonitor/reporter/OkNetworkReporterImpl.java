@@ -5,16 +5,9 @@ import android.util.Log;
 
 import com.linkaipeng.oknetworkmonitor.stetho.NetworkEventReporter;
 import com.linkaipeng.oknetworkmonitor.stetho.ResponseHandler;
-import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl;
-import com.linkaipeng.oknetworkmonitor.data.NetworkFeedModel;
 import com.linkaipeng.oknetworkmonitor.utils.DataTranslator;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -26,7 +19,7 @@ public class OkNetworkReporterImpl implements NetworkEventReporter {
 
     private static final String TAG = "OkNetworkReporterImpl";
     private final AtomicInteger mNextRequestId = new AtomicInteger(0);
-    private Map<String, Long> mStartTimeMap = new HashMap();
+    private DataTranslator mDataTranslator;
 
     private static OkNetworkReporterImpl sInstance;
 
@@ -37,6 +30,10 @@ public class OkNetworkReporterImpl implements NetworkEventReporter {
         return sInstance;
     }
 
+    private OkNetworkReporterImpl() {
+        mDataTranslator = new DataTranslator();
+    }
+
     @Override
     public boolean isEnabled() {
         return true;
@@ -45,31 +42,13 @@ public class OkNetworkReporterImpl implements NetworkEventReporter {
     @Override
     public void requestWillBeSent(InspectorRequest request) {
         Log.d(TAG, "requestWillBeSent");
-        StringBuilder requestBuilder = new StringBuilder()
-                .append("url = ").append(request.url())
-                .append("\nmethod = ").append(request.method())
-                .append("\nheaderCount = ").append(request.headerCount())
-                .append("\nfriendlyName = ").append(request.friendlyName());
-        Log.d(TAG, "requestBuilder = "+requestBuilder.toString());
-
-        DataTranslator.saveInspectorRequest(request);
-        mStartTimeMap.put(request.id(), System.currentTimeMillis());
+        mDataTranslator.saveInspectorRequest(request);
     }
 
     @Override
     public void responseHeadersReceived(InspectorResponse response) {
         Log.d(TAG, "responseHeadersReceived");
-        String requestId = response.requestId();
-        long costTime;
-        if (mStartTimeMap.containsKey(requestId)) {
-            costTime = System.currentTimeMillis() - mStartTimeMap.get(requestId);
-            Log.d(TAG, "cost time = " + costTime + "ms");
-        } else {
-            costTime = -1;
-        }
-        NetworkFeedModel networkFeedModel = DataPoolImpl.getInstance().getNetworkFeedModel(requestId);
-        networkFeedModel.setCostTime(costTime);
-        networkFeedModel.setStatus(response.statusCode());
+        mDataTranslator.saveInspectorResponse(response);
     }
 
     @Override
@@ -81,16 +60,7 @@ public class OkNetworkReporterImpl implements NetworkEventReporter {
     @Override
     public InputStream interpretResponseStream(String requestId, @Nullable String contentType, @Nullable String contentEncoding, @Nullable InputStream inputStream, ResponseHandler responseHandler) {
         Log.d(TAG, "interpretResponseStream");
-        NetworkFeedModel networkFeedModel = DataPoolImpl.getInstance().getNetworkFeedModel(requestId);
-        networkFeedModel.setContentType(contentType);
-        ByteArrayOutputStream byteArrayOutputStream = DataTranslator.parseAndSaveBody(inputStream, networkFeedModel);
-        InputStream newInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
-        try {
-            byteArrayOutputStream.close();
-        } catch (IOException e) {
-            Log.e(TAG, TAG, e);
-        }
-        return newInputStream;
+        return mDataTranslator.saveInterpretResponseStream(requestId, contentType, contentEncoding, inputStream);
     }
 
     @Override

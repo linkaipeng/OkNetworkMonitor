@@ -43,7 +43,7 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
         }
         ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
         final NetworkFeedModel networkFeedModel = mNetworkFeedList.get(i);
-        itemViewHolder.mUrlTextView.setText("Url:" + networkFeedModel.getUrl());
+        itemViewHolder.mUrlTextView.setText("Url: " + networkFeedModel.getUrl());
 
         if (networkFeedModel.getStatus() >= 400 && networkFeedModel.getStatus() <= 600) {
             itemViewHolder.mStatusView.setBackgroundResource(R.drawable.red_rect);
@@ -64,6 +64,9 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
                 NetworkFeedDetailActivity.start(mContext, networkFeedModel.getRequestId());
             }
         });
+
+        itemViewHolder.mMethodTextView.setText("Method: "+networkFeedModel.getMethod());
+        itemViewHolder.mContentTypeTextView.setText("ContentType: "+networkFeedModel.getContentType());
     }
 
     @Override
@@ -78,6 +81,8 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
         private TextView mStatusCodeTextView;
         private TextView mSizeTextView;
         private TextView mCostTimeTextView;
+        private TextView mMethodTextView;
+        private TextView mContentTypeTextView;
         private View mStatusView;
 
         public ItemViewHolder(View itemView) {
@@ -87,6 +92,8 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
             mStatusCodeTextView = itemView.findViewById(R.id.item_network_feed_status_textView);
             mSizeTextView = itemView.findViewById(R.id.item_network_feed_size_textView);
             mCostTimeTextView = itemView.findViewById(R.id.item_network_feed_cost_time_textView);
+            mMethodTextView = itemView.findViewById(R.id.item_network_feed_method_textView);
+            mContentTypeTextView = itemView.findViewById(R.id.item_network_feed_content_type_textView);
             mStatusView = itemView.findViewById(R.id.item_network_feed_status_view);
         }
     }
