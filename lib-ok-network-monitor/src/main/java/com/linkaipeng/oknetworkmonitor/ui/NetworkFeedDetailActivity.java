@@ -68,11 +68,16 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
     }
 
     private void setBody() {
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-        JsonObject bodyJO = new JsonParser().parse(mNetworkFeedModel.getBody()).getAsJsonObject();
-        mBodyTextView.setText(gson.toJson(bodyJO));
+        if (mNetworkFeedModel.getContentType().contains("json")) {
+            Gson gson = new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create();
+            JsonObject bodyJO = new JsonParser().parse(mNetworkFeedModel.getBody()).getAsJsonObject();
+            mBodyTextView.setText(gson.toJson(bodyJO));
+        } else {
+            mBodyTextView.setText(mNetworkFeedModel.getBody());
+        }
+
     }
 
     private String parseHeadersMapToString(Map<String, String> headers) {

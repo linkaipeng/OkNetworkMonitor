@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 super.run();
-                OkHttpManager.getInstance().get("http://www.wanandroid.com/article/list/1/json", new Callback() {
+                OkHttpManager.getInstance().get("http://www.baidu.com", new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.e(TAG, "e = "+e.getMessage());
