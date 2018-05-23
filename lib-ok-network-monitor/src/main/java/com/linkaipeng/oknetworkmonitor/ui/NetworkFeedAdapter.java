@@ -43,7 +43,7 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
         }
         ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
         final NetworkFeedModel networkFeedModel = mNetworkFeedList.get(i);
-        itemViewHolder.mUrlTextView.setText("Url: " + networkFeedModel.getUrl());
+        itemViewHolder.mUrlTextView.setText(networkFeedModel.getUrl());
 
         if (networkFeedModel.getStatus() >= 400 && networkFeedModel.getStatus() <= 600) {
             itemViewHolder.mStatusView.setBackgroundResource(R.drawable.red_rect);
@@ -52,12 +52,12 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
             itemViewHolder.mStatusView.setBackgroundResource(R.drawable.green_rect);
             itemViewHolder.mStatusCodeTextView.setTextColor(mContext.getResources().getColor(R.color.green));
         }
-        itemViewHolder.mStatusCodeTextView.setText("StatusCode: "+networkFeedModel.getStatus());
+        itemViewHolder.mStatusCodeTextView.setText("Status: "+networkFeedModel.getStatus());
 
         Format format = new DecimalFormat("#.00");
-        String dataSize = "Size: " + format.format(networkFeedModel.getSize() * 0.001) + " KB";
+        String dataSize = format.format(networkFeedModel.getSize() * 0.001) + " KB";
         itemViewHolder.mSizeTextView.setText(dataSize);
-        itemViewHolder.mCostTimeTextView.setText("CostTime: " + networkFeedModel.getCostTime() + " ms");
+        itemViewHolder.mCostTimeTextView.setText(networkFeedModel.getCostTime() + " ms");
         itemViewHolder.mRootLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +65,7 @@ public class NetworkFeedAdapter extends RecyclerView.Adapter {
             }
         });
 
-        itemViewHolder.mMethodTextView.setText("Method: "+networkFeedModel.getMethod());
+        itemViewHolder.mMethodTextView.setText(networkFeedModel.getMethod());
         itemViewHolder.mContentTypeTextView.setText("ContentType: "+networkFeedModel.getContentType());
     }
 

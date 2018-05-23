@@ -4,14 +4,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_gray">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
+        android:paddingBottom="30dp"
         android:orientation="vertical">
 
         <TextView
@@ -20,6 +21,8 @@
 
         <TextView
             android:id="@+id/request_headers_textView"
+            android:textColor="#8033b7"
+            android:background="@drawable/bg_request_headers"
             style="@style/DetailContent"/>
 
         <TextView
@@ -28,6 +31,8 @@
 
         <TextView
             android:id="@+id/response_headers_textView"
+            android:textColor="#257ada"
+            android:background="@drawable/bg_response_headers"
             style="@style/DetailContent"/>
 
         <TextView
@@ -36,6 +41,8 @@
 
         <TextView
             android:id="@+id/body_textView"
+            android:textColor="#4dac41"
+            android:background="@drawable/bg_response"
             style="@style/DetailContent"/>
 
     </LinearLayout>
