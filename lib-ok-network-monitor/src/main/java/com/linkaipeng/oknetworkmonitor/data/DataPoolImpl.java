@@ -70,6 +70,7 @@ public class DataPoolImpl implements IDataPoolHandle {
         if (networkFeedModel == null) {
             networkFeedModel = new NetworkFeedModel();
             networkFeedModel.setRequestId(requestId);
+            networkFeedModel.setCreateTime(System.currentTimeMillis());
             mNetworkFeedMap.put(requestId, networkFeedModel);
         }
         return networkFeedModel;

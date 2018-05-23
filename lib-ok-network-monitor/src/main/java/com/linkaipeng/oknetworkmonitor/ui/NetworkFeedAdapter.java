@@ -2,6 +2,7 @@ package com.linkaipeng.oknetworkmonitor.ui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.linkaipeng.oknetworkmonitor.data.NetworkFeedModel;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -23,12 +26,24 @@ import java.util.List;
 
 public class NetworkFeedAdapter extends RecyclerView.Adapter {
 
+    private static final String TAG = "NetworkFeedAdapter";
     private Context mContext;
     private List<NetworkFeedModel> mNetworkFeedList;
 
     public NetworkFeedAdapter(Context context) {
         mContext = context;
         mNetworkFeedList = new ArrayList(DataPoolImpl.getInstance().getNetworkFeedMap().values());
+
+        try {
+            Collections.sort(mNetworkFeedList, new Comparator<NetworkFeedModel>() {
+                @Override
+                public int compare(NetworkFeedModel networkFeedModel1, NetworkFeedModel networkFeedModel2) {
+                    return (int) (networkFeedModel2.getCreateTime() - networkFeedModel1.getCreateTime());
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, TAG, e);
+        }
     }
 
     @Override

@@ -23,6 +23,8 @@ public class NetworkFeedModel implements Serializable {
     private String mBody;
     private Map<String, String> mResponseHeadersMap;
 
+    private long mCreateTime;
+
     public String getRequestId() {
         return mRequestId;
     }
@@ -119,6 +121,14 @@ public class NetworkFeedModel implements Serializable {
         mResponseHeadersMap = responseHeadersMap;
     }
 
+    public long getCreateTime() {
+        return mCreateTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        mCreateTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "NetworkFeedModel{" +
@@ -134,6 +144,7 @@ public class NetworkFeedModel implements Serializable {
                 ", mContentType='" + mContentType + '\'' +
                 ", mBody='" + mBody + '\'' +
                 ", mResponseHeadersMap=" + mResponseHeadersMap +
+                ", mCreateTime=" + mCreateTime +
                 '}';
     }
 }
