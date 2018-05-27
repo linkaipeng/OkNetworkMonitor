@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true" >
+        <bitmap
+            android:src="@mipmap/ic_back_gray"
+            android:alpha="0.5"/>
+    </item>
+
+    <item android:state_focused="true" >
+        <bitmap
+            android:src="@mipmap/ic_back_gray"
+            android:alpha="0.5"/>
+    </item>
+
+    <item android:state_selected="true" >
+        <bitmap
+            android:src="@mipmap/ic_back_gray"
+            android:alpha="0.5"/>
+    </item>
+
+    <item android:drawable="@mipmap/ic_back_gray"/>
+</selector>

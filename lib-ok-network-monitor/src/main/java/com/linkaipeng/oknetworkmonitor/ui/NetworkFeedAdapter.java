@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.facebook.stetho.okhttp3.R;
+import com.linkaipeng.oknetworkmonitor.R;
 import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl;
 import com.linkaipeng.oknetworkmonitor.data.NetworkFeedModel;
 
