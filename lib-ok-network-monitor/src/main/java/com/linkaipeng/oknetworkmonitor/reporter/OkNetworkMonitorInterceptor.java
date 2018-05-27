@@ -38,11 +38,11 @@ import okio.Okio;
  * use:
  * <pre>
  *   OkHttpClient client = new OkHttpClient.Builder()
- *       .addNetworkInterceptor(new MyStethoInterceptor())
+ *       .addNetworkInterceptor(new OkNetworkMonitorInterceptor())
  *       .build();
  * </pre>
  */
-public class MyStethoInterceptor implements Interceptor {
+public class OkNetworkMonitorInterceptor implements Interceptor {
   private final NetworkEventReporter mEventReporter = OkNetworkReporterImpl.getInstance();
 
   @Override

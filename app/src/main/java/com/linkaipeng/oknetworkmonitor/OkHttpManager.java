@@ -1,6 +1,6 @@
 package com.linkaipeng.oknetworkmonitor;
 
-import com.linkaipeng.oknetworkmonitor.reporter.MyStethoInterceptor;
+import com.linkaipeng.oknetworkmonitor.reporter.OkNetworkMonitorInterceptor;
 
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -24,7 +24,7 @@ public class OkHttpManager {
 
     public void get(String url, Callback callback) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addNetworkInterceptor(new MyStethoInterceptor())
+                .addNetworkInterceptor(new OkNetworkMonitorInterceptor())
                 .build();
 
         Request request = new Request.Builder()
