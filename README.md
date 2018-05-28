@@ -1,4 +1,4 @@
-#OkNetworkMonitor
+# OkNetworkMonitor
 
 A network monitor for okHttp base on stetho.
 
@@ -42,9 +42,7 @@ NetworkFeedActivity.start(this);
 
 ## Screenshots
 
-<img src="screenshots/screenshot1.png" width=216/>
-<img src="screenshots/screenshot2.png" width=216/>
-<img src="screenshots/screenshot3.png" width=216/>
+<img src="screenshots/screenshot1.png" width=300/> <img src="screenshots/screenshot2.png" width=300/> <img src="screenshots/screenshot3.png" width=300/>
 
 
 ## LICENSE
