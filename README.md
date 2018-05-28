@@ -1,6 +1,7 @@
 #OkNetworkMonitor
 
 A network monitor for okHttp.
+You can view the request header, response header, response body and so on of a network request you send.
 
 
 ## Usage
@@ -9,7 +10,7 @@ A network monitor for okHttp.
 
 `implementation project(':lib-ok-network-monitor')`
 
-### Add a network `Interceptor` for `OkHttpClient`
+### Add a network Interceptor for `OkHttpClient`
 
 ```
 new OkHttpClient.Builder()
@@ -40,9 +41,9 @@ NetworkFeedActivity.start(this);
 
 ## Screenshots
 
-<img src="art/screenshot1.png" width=216/>
-<img src="art/screenshot2.png" width=216/>
-<img src="art/screenshot3.png" width=216/>
+<img src="screenshots/screenshot1.png" width=216/>
+<img src="screenshots/screenshot2.png" width=216/>
+<img src="screenshots/screenshot3.png" width=216/>
 
 
 ## LICENSE
