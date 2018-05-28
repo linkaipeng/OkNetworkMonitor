@@ -1,8 +1,8 @@
 #OkNetworkMonitor
 
-A network monitor for okHttp.
+A network monitor for okHttp base on stetho.
 
-You can view the request header, response header, response body and so on of a network request you send.
+You can view the request header, response header, response body and so on of a network request in your app.
 
 
 ## Usage
