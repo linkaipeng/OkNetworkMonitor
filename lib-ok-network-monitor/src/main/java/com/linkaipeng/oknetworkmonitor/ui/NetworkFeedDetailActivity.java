@@ -9,13 +9,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.linkaipeng.oknetworkmonitor.R;
 import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl;
 import com.linkaipeng.oknetworkmonitor.data.NetworkFeedModel;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -25,6 +25,7 @@ import java.util.Map;
 
 public class NetworkFeedDetailActivity extends AppCompatActivity {
 
+    public static final int JSON_INDENT = 4;
     private NetworkFeedModel mNetworkFeedModel;
     private TextView mRequestHeadersTextView;
     private TextView mResponseHeadersTextView;
@@ -78,11 +79,7 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
 
     private void setBody() {
         if (mNetworkFeedModel.getContentType().contains("json")) {
-            Gson gson = new GsonBuilder()
-                    .setPrettyPrinting()
-                    .create();
-            JsonObject bodyJO = new JsonParser().parse(mNetworkFeedModel.getBody()).getAsJsonObject();
-            mBodyTextView.setText(gson.toJson(bodyJO));
+            mBodyTextView.setText(formatJson(mNetworkFeedModel.getBody()));
         } else {
             mBodyTextView.setText(mNetworkFeedModel.getBody());
         }
@@ -105,5 +102,24 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
                     .append("\n");
         }
         return headersBuilder.toString();
+    }
+
+    private String formatJson(String body) {
+        String message;
+        try {
+            if (body.startsWith("{")) {
+                JSONObject jsonObject = new JSONObject(body);
+                message = jsonObject.toString(JSON_INDENT);
+            } else if (body.startsWith("[")) {
+                JSONArray jsonArray = new JSONArray(body);
+                message = jsonArray.toString(JSON_INDENT);
+            } else {
+                message = body;
+            }
+        } catch (JSONException e) {
+            message = body;
+        }
+
+        return message;
     }
 }
