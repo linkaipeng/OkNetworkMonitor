@@ -33,7 +33,7 @@ NetworkFeedActivity.start(this);
 
 You can find the entrance in your launcher.
 
-<img src="screenshots/screenshot1.png" width=250/>
+<img src="screenshots/screenshot4.png" width=250/>
 
 
 ## Screenshots

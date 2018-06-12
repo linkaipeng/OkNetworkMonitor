@@ -29,7 +29,7 @@ NetworkFeedActivity.start(this);
 
 #### 2.或者桌面快捷入口
 
-<img src="screenshots/screenshot1.png" width=250/>
+<img src="screenshots/screenshot4.png" width=250/>
 
 
 
