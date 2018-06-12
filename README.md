@@ -21,25 +21,19 @@ new OkHttpClient.Builder()
 
 ```
 
-### Add activities to your `AndroidManifest.xml`
+### Entrance
 
-```
-<activity
-    android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedActivity"
-    android:screenOrientation="portrait"/>
-
-<activity
-    android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedDetailActivity"
-    android:screenOrientation="portrait"/>
-
-```
-
-
-### Start activity
+#### 1.Start activity
 
 ```
 NetworkFeedActivity.start(this);
 ```
+
+#### 2.OR
+
+You can find the entrance in your launcher.
+
+<img src="screenshots/screenshot1.png" width=250/>
 
 
 ## Screenshots

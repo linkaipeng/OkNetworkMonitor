@@ -19,24 +19,18 @@ new OkHttpClient.Builder()
     
 ```
 
-### 配置 `AndroidManifest.xml` 文件
+### 入口
+
+#### 1.跳到抓包页面
 
 ```
-
-<activity
-    android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedActivity"
-    android:screenOrientation="portrait"/>
-
-<activity
-    android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedDetailActivity"
-    android:screenOrientation="portrait"/>
-    
+NetworkFeedActivity.start(this);
 ```
 
+#### 2.或者桌面快捷入口
 
-### 跳到抓包页面
+<img src="screenshots/screenshot1.png" width=250/>
 
-` NetworkFeedActivity.start(this); `
 
 
 ## 截图
