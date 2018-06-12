@@ -22,14 +22,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedActivity"
-            android:screenOrientation="portrait"/>
-
-        <activity
-            android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedDetailActivity"
-            android:screenOrientation="portrait"/>
-
     </application>
 
 </manifest>
