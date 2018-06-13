@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Created by linkaipeng on 2018/5/17.
@@ -24,6 +25,7 @@ import java.util.Map;
 public class DataTranslator {
 
     private static final String TAG = "DataTranslator";
+    private static final String GZIP_ENCODING = "gzip";
     private Map<String, Long> mStartTimeMap = new HashMap();
 
 
@@ -75,7 +77,7 @@ public class DataTranslator {
     public InputStream saveInterpretResponseStream(String requestId, String contentType, String contentEncoding, InputStream inputStream) {
         NetworkFeedModel networkFeedModel = DataPoolImpl.getInstance().getNetworkFeedModel(requestId);
         networkFeedModel.setContentType(contentType);
-        ByteArrayOutputStream byteArrayOutputStream = parseAndSaveBody(inputStream, networkFeedModel);
+        ByteArrayOutputStream byteArrayOutputStream = parseAndSaveBody(inputStream, networkFeedModel, contentEncoding);
         InputStream newInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
         try {
             byteArrayOutputStream.close();
@@ -85,7 +87,7 @@ public class DataTranslator {
         return newInputStream;
     }
 
-    private ByteArrayOutputStream parseAndSaveBody(InputStream inputStream, NetworkFeedModel networkFeedModel) {
+    private ByteArrayOutputStream parseAndSaveBody(InputStream inputStream, NetworkFeedModel networkFeedModel, String contentEncoding) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         byte[] buffer = new byte[1024];
         int len;
@@ -95,7 +97,13 @@ public class DataTranslator {
             }
             byteArrayOutputStream.flush();
             InputStream newStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(newStream));
+            BufferedReader bufferedReader;
+            if (GZIP_ENCODING.equals(contentEncoding)) {
+                GZIPInputStream gzipInputStream = new GZIPInputStream(newStream);
+                bufferedReader = new BufferedReader(new InputStreamReader(gzipInputStream));
+            } else {
+                bufferedReader = new BufferedReader(new InputStreamReader(newStream));
+            }
             StringBuilder bodyBuilder = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
