@@ -1,4 +1,4 @@
-package com.linkaipeng.oknetworkmonitor;
+package com.linkaipeng.oknetworkmonitor.demo;
 
 import android.app.Application;
 

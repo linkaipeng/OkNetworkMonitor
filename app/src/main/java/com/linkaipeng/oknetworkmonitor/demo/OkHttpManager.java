@@ -1,4 +1,4 @@
-package com.linkaipeng.oknetworkmonitor;
+package com.linkaipeng.oknetworkmonitor.demo;
 
 import com.linkaipeng.oknetworkmonitor.reporter.OkNetworkMonitorInterceptor;
 
