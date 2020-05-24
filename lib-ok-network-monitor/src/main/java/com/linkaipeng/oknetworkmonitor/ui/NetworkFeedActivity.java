@@ -1,4 +1,4 @@
-package com.linkaipeng.oknetworkmonitor.demo.ui;
+package com.linkaipeng.oknetworkmonitor.ui;
 
 import android.content.Context;
 import android.content.Intent;

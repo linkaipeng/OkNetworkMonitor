@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.linkaipeng.oknetworkmonitor.demo.OkHttpManager;
 import com.linkaipeng.oknetworkmonitor.demo.R;
+import com.linkaipeng.oknetworkmonitor.ui.NetworkFeedActivity;
 
 import java.io.IOException;
 

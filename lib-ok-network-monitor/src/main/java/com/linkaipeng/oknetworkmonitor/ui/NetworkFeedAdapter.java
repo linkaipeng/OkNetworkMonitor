@@ -1,4 +1,4 @@
-package com.linkaipeng.oknetworkmonitor.demo.ui;
+package com.linkaipeng.oknetworkmonitor.ui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
