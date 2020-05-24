@@ -10,7 +10,7 @@
 package com.linkaipeng.oknetworkmonitor.reporter;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.linkaipeng.oknetworkmonitor.stetho.DefaultResponseHandler;
 import com.linkaipeng.oknetworkmonitor.stetho.NetworkEventReporter;

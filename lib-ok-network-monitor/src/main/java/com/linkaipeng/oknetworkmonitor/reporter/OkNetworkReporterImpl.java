@@ -1,6 +1,6 @@
 package com.linkaipeng.oknetworkmonitor.reporter;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.linkaipeng.oknetworkmonitor.stetho.NetworkEventReporter;

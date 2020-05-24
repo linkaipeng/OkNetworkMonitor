@@ -10,7 +10,7 @@
 package com.linkaipeng.oknetworkmonitor.stetho;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
