@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendRequest() {
+        mResponseTextView.setText("loading...");
         new Thread(){
             @Override
             public void run() {

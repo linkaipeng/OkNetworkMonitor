@@ -77,14 +77,20 @@ public class DataTranslator {
     public InputStream saveInterpretResponseStream(String requestId, String contentType, String contentEncoding, InputStream inputStream) {
         NetworkFeedModel networkFeedModel = DataPoolImpl.getInstance().getNetworkFeedModel(requestId);
         networkFeedModel.setContentType(contentType);
-        ByteArrayOutputStream byteArrayOutputStream = parseAndSaveBody(inputStream, networkFeedModel, contentEncoding);
-        InputStream newInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
-        try {
-            byteArrayOutputStream.close();
-        } catch (IOException e) {
-            Log.e(TAG, TAG, e);
+        if (isSupportType(contentType)) {
+            ByteArrayOutputStream byteArrayOutputStream = parseAndSaveBody(inputStream, networkFeedModel, contentEncoding);
+            InputStream newInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+            try {
+                byteArrayOutputStream.close();
+            } catch (IOException e) {
+                Log.e(TAG, TAG, e);
+            }
+            return newInputStream;
+        } else {
+            networkFeedModel.setBody(contentType + " is not supported.");
+            networkFeedModel.setSize(0);
+            return inputStream;
         }
-        return newInputStream;
     }
 
     private ByteArrayOutputStream parseAndSaveBody(InputStream inputStream, NetworkFeedModel networkFeedModel, String contentEncoding) {
@@ -116,5 +122,9 @@ public class DataTranslator {
             Log.e(TAG, TAG, e);
         }
         return byteArrayOutputStream;
+    }
+
+    private boolean isSupportType(String contentType) {
+        return contentType.contains("text") || contentType.contains("json");
     }
 }
