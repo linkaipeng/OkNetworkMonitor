@@ -3,15 +3,17 @@ package com.linkaipeng.oknetworkmonitor.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.linkaipeng.oknetworkmonitor.R;
 import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl;
 import com.linkaipeng.oknetworkmonitor.data.NetworkFeedModel;
+import com.linkaipeng.oknetworkmonitor.utils.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +29,7 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
 
     public static final int JSON_INDENT = 4;
     private NetworkFeedModel mNetworkFeedModel;
+    private TextView mCURLTextView;
     private TextView mRequestHeadersTextView;
     private TextView mResponseHeadersTextView;
     private TextView mBodyTextView;
@@ -42,6 +45,7 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_feed_detail);
+        mCURLTextView = findViewById(R.id.curl_content_textView);
         mRequestHeadersTextView = findViewById(R.id.request_headers_textView);
         mResponseHeadersTextView = findViewById(R.id.response_headers_textView);
         mBodyTextView = findViewById(R.id.body_textView);
@@ -64,9 +68,21 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
         if (mNetworkFeedModel == null) {
             return;
         }
+        setCURLContent();
         setRequestHeaders();
         setResponseHeaders();
         setBody();
+    }
+
+    private void setCURLContent() {
+        mCURLTextView.setText(mNetworkFeedModel.getCURL());
+        mCURLTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.Companion.copyToClipBoard(NetworkFeedDetailActivity.this,
+                        mNetworkFeedModel.getCURL());
+            }
+        });
     }
 
     private void setRequestHeaders() {

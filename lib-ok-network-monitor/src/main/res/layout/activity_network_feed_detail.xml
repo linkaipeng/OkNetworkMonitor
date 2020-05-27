@@ -42,6 +42,36 @@
             android:paddingBottom="30dp"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/DetailTitle"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="cURL"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#999999"
+                    android:layout_marginLeft="5dp"
+                    android:text="(Click 👇 to copy)"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/curl_content_textView"
+                android:textColor="#196EB2"
+                android:background="@drawable/bg_curl_content"
+                style="@style/DetailContent"/>
+
             <TextView
                 style="@style/DetailTitle"
                 android:text="Request Headers"/>

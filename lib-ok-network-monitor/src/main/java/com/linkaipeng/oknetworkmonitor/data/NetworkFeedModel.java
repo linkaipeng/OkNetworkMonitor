@@ -25,6 +25,8 @@ public class NetworkFeedModel implements Serializable {
 
     private long mCreateTime;
 
+    private String mCURL;
+
     public String getRequestId() {
         return mRequestId;
     }
@@ -129,6 +131,14 @@ public class NetworkFeedModel implements Serializable {
         mCreateTime = createTime;
     }
 
+    public String getCURL() {
+        return mCURL;
+    }
+
+    public void setCURL(String CURL) {
+        mCURL = CURL;
+    }
+
     @Override
     public String toString() {
         return "NetworkFeedModel{" +
@@ -145,6 +155,7 @@ public class NetworkFeedModel implements Serializable {
                 ", mBody='" + mBody + '\'' +
                 ", mResponseHeadersMap=" + mResponseHeadersMap +
                 ", mCreateTime=" + mCreateTime +
+                ", mCURL='" + mCURL + '\'' +
                 '}';
     }
 }

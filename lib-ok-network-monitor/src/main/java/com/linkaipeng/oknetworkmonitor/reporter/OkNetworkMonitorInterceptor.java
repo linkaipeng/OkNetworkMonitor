@@ -12,6 +12,8 @@ package com.linkaipeng.oknetworkmonitor.reporter;
 
 import androidx.annotation.Nullable;
 
+import com.linkaipeng.oknetworkmonitor.curl.CurlGenerator;
+import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl;
 import com.linkaipeng.oknetworkmonitor.stetho.DefaultResponseHandler;
 import com.linkaipeng.oknetworkmonitor.stetho.NetworkEventReporter;
 import com.linkaipeng.oknetworkmonitor.stetho.RequestBodyHelper;
@@ -50,6 +52,9 @@ public class OkNetworkMonitorInterceptor implements Interceptor {
     String requestId = mEventReporter.nextRequestId();
 
     Request request = chain.request();
+
+    DataPoolImpl.getInstance().getNetworkFeedModel(requestId)
+            .setCURL(CurlGenerator.Companion.generateCurl(request));
 
     RequestBodyHelper requestBodyHelper = null;
     if (mEventReporter.isEnabled()) {
