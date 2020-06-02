@@ -1,6 +1,7 @@
 package com.linkaipeng.oknetworkmonitor.data;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -8,6 +9,26 @@ import java.util.Map;
  */
 
 public class NetworkFeedModel implements Serializable {
+
+    public static final String CALL_START = "callStart";
+    public static final String CALL_END = "callEnd";
+
+    public static final String DNS_START = "dnsStart";
+    public static final String DNS_END = "dnsEnd";
+    public static final String CONNECT_START = "connectStart";
+    public static final String SECURE_CONNECT_START = "secureConnectStart";
+    public static final String SECURE_CONNECT_END = "secureConnectEnd";
+    public static final String CONNECT_END = "connectEnd";
+
+    public static final String REQUEST_BODY_START = "requestBodyStart";
+    public static final String REQUEST_BODY_END = "requestBodyEnd";
+    public static final String REQUEST_HEADERS_START = "requestHeadersStart";
+    public static final String REQUEST_HEADERS_END = "requestHeadersEnd";
+
+    public static final String RESPONSE_HEADERS_START = "responseHeadersStart";
+    public static final String RESPONSE_HEADERS_END = "responseHeadersEnd";
+    public static final String RESPONSE_BODY_START = "responseBodyStart";
+    public static final String RESPONSE_BODY_END = "responseBodyEnd";
 
     private String mRequestId;
     private String mUrl;
@@ -26,6 +47,8 @@ public class NetworkFeedModel implements Serializable {
     private long mCreateTime;
 
     private String mCURL;
+
+    private Map<String, Long> mNetworkEventMap = new HashMap<>();
 
     public String getRequestId() {
         return mRequestId;
@@ -60,6 +83,9 @@ public class NetworkFeedModel implements Serializable {
     }
 
     public Map<String, String> getRequestHeadersMap() {
+        if (mRequestHeadersMap == null) {
+            mRequestHeadersMap = new HashMap<>();
+        }
         return mRequestHeadersMap;
     }
 
@@ -139,6 +165,14 @@ public class NetworkFeedModel implements Serializable {
         mCURL = CURL;
     }
 
+    public Map<String, Long> getNetworkEventMap() {
+        return mNetworkEventMap;
+    }
+
+    public void setNetworkEventMap(Map<String, Long> networkEventMap) {
+        mNetworkEventMap = networkEventMap;
+    }
+
     @Override
     public String toString() {
         return "NetworkFeedModel{" +
@@ -156,6 +190,7 @@ public class NetworkFeedModel implements Serializable {
                 ", mResponseHeadersMap=" + mResponseHeadersMap +
                 ", mCreateTime=" + mCreateTime +
                 ", mCURL='" + mCURL + '\'' +
+                ", mNetworkEventMap=" + mNetworkEventMap +
                 '}';
     }
 }

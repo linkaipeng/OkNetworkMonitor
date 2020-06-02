@@ -1,5 +1,6 @@
 package com.linkaipeng.oknetworkmonitor.demo;
 
+import com.linkaipeng.oknetworkmonitor.listener.NetworkEventListener;
 import com.linkaipeng.oknetworkmonitor.reporter.OkNetworkMonitorInterceptor;
 
 import okhttp3.Callback;
@@ -24,6 +25,7 @@ public class OkHttpManager {
 
     public void get(String url, Callback callback) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .eventListenerFactory(NetworkEventListener.Companion.getFACTORY())
                 .addNetworkInterceptor(new OkNetworkMonitorInterceptor())
                 .build();
 
