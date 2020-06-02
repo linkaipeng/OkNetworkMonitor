@@ -74,6 +74,16 @@
 
             <TextView
                 style="@style/DetailTitle"
+                android:text="Events Cost Time (ms)"/>
+
+            <TextView
+                android:id="@+id/events_textView"
+                android:textColor="#4dac41"
+                android:background="@drawable/bg_response"
+                style="@style/DetailContent"/>
+
+            <TextView
+                style="@style/DetailTitle"
                 android:text="Request Headers"/>
 
             <TextView

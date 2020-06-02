@@ -83,9 +83,6 @@ public class NetworkFeedModel implements Serializable {
     }
 
     public Map<String, String> getRequestHeadersMap() {
-        if (mRequestHeadersMap == null) {
-            mRequestHeadersMap = new HashMap<>();
-        }
         return mRequestHeadersMap;
     }
 
