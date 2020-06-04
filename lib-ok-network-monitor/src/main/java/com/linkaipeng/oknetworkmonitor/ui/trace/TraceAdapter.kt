@@ -24,7 +24,7 @@ class TraceAdapter(private val context: Context?): RecyclerView.Adapter<TraceAda
         if (!values.isNullOrEmpty()) {
             traceList.addAll(values)
         }
-        traceList.sortBy { 
+        traceList.sortByDescending {
             it.time
         }
     }
