@@ -1,14 +1,15 @@
 package com.linkaipeng.oknetworkmonitor.demo.ui;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.linkaipeng.oknetworkmonitor.demo.OkHttpManager;
 import com.linkaipeng.oknetworkmonitor.demo.R;
-import com.linkaipeng.oknetworkmonitor.ui.NetworkFeedActivity;
+import com.linkaipeng.oknetworkmonitor.ui.RequestsActivity;
 
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mResponseTextView = findViewById(R.id.response_textView);
         findViewById(R.id.test_button).setOnClickListener(view -> sendRequest());
-        findViewById(R.id.to_feed_list_button).setOnClickListener(view -> NetworkFeedActivity.start(this));
+        findViewById(R.id.to_feed_list_button).setOnClickListener(view -> RequestsActivity.Companion.starter(this));
     }
 
     private void sendRequest() {

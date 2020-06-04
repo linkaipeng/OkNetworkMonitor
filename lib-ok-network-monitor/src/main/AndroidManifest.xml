@@ -11,17 +11,12 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedDetailActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.RequestsActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
