@@ -13,4 +13,6 @@ public interface IDataPoolHandle {
     void removeNetworkFeedData(String key);
     HashMap<String, NetworkFeedModel> getNetworkFeedMap();
     NetworkFeedModel getNetworkFeedModel(String requestId);
+
+    NetworkTraceModel getNetworkTraceModel(String id);
 }
