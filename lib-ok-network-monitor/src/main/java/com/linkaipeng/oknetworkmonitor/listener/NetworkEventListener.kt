@@ -5,7 +5,6 @@ import android.util.Log
 import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl
 import com.linkaipeng.oknetworkmonitor.data.NetworkTraceModel
 import okhttp3.*
-import okhttp3.EventListener.Factory
 import java.io.IOException
 import java.net.InetAddress
 import java.net.InetSocketAddress
@@ -19,7 +18,11 @@ class NetworkEventListener : EventListener() {
 
     companion object {
         private const val TAG = "NetworkEventListener"
-        val FACTORY = Factory { NetworkEventListener() }
+        val FACTORY = object : Factory {
+            override fun create(call: Call): EventListener {
+                return NetworkEventListener()
+            }
+        }
         val mNextRequestId = AtomicInteger(0)
     }
 
@@ -29,7 +32,7 @@ class NetworkEventListener : EventListener() {
         super.callStart(call)
         mRequestId = mNextRequestId.getAndIncrement().toString()
         saveEvent(NetworkTraceModel.CALL_START)
-        saveUrl(call.request().url().toString())
+        saveUrl(call.request().url.toString())
     }
 
     override fun dnsStart(call: Call, domainName: String) {

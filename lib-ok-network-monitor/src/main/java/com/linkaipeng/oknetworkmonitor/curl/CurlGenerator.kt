@@ -13,10 +13,10 @@ class CurlGenerator {
             var compressed = false
 
             var curlCmd = "curl"
-            curlCmd += " -X " + request.method()
+            curlCmd += " -X " + request.method
 
-            val headers = request.headers()
-            for (i in 0 until headers.size()) {
+            val headers = request.headers
+            for (i in 0 until headers.size) {
                 val name = headers.name(i)
                 var value = headers.value(i)
 
@@ -32,7 +32,7 @@ class CurlGenerator {
                 curlCmd += " -H \"$name: $value\""
             }
 
-            request.body()?.let {
+            request.body?.let {
                 val contentType = it.contentType()
                 contentType?.let { contentType -> curlCmd += " -H Content-Type: $contentType" }
                 val buffer = Buffer().apply { it.writeTo(this) }
@@ -41,7 +41,7 @@ class CurlGenerator {
                 curlCmd += " --data $'" + buffer.readString(charset).replace("\n", "\n") + "'"
             }
 
-            curlCmd += (if (compressed) " --compressed " else " ") + "\"${request.url()}\""
+            curlCmd += (if (compressed) " --compressed " else " ") + "\"${request.url}\""
 
             return curlCmd
         }
