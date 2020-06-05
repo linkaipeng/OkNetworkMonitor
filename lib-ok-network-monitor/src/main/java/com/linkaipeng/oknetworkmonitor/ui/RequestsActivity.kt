@@ -60,6 +60,10 @@ class RequestsActivity: AppCompatActivity() {
                 finish()
                 true
             }
+            R.id.requests_settings -> {
+                SettingsActivity.starter(this)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -1,34 +1,83 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <PreferenceCategory
+        app:title="Timeout Warning"
+        app:iconSpaceReserved="false"
+        app:summary="Notification will be displayed when action timeout.">
 
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
+        <ListPreference
+            app:key="wholeRequest"
+            app:allowDividerAbove="true"
+            app:title="Whole Request timeout warning"
+            app:iconSpaceReserved="false"
+            app:entryValues="@array/timeout_ms_value"
+            app:entries="@array/timeout_ms"
+            app:defaultValue="0"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
+            app:key="dns"
+            app:title="DNS timeout warning"
+            app:iconSpaceReserved="false"
+            app:entryValues="@array/timeout_ms_value"
+            app:entries="@array/timeout_ms"
+            app:defaultValue="0"
             app:useSimpleSummaryProvider="true" />
 
-    </PreferenceCategory>
+        <ListPreference
+            app:key="secureConnect"
+            app:title="SecureConnect timeout warning"
+            app:iconSpaceReserved="false"
+            app:entryValues="@array/timeout_ms_value"
+            app:entries="@array/timeout_ms"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
 
-    <PreferenceCategory app:title="@string/sync_header">
+        <ListPreference
+            app:key="connect"
+            app:title="Connect timeout warning"
+            app:iconSpaceReserved="false"
+            app:entryValues="@array/timeout_ms_value"
+            app:entries="@array/timeout_ms"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
+        <ListPreference
+            app:key="requestHeaders"
+            app:title="Request headers timeout warning"
+            app:iconSpaceReserved="false"
+            app:entryValues="@array/timeout_ms_value"
+            app:entries="@array/timeout_ms"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
 
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+        <ListPreference
+            app:key="requestBody"
+            app:title="Request body timeout warning"
+            app:iconSpaceReserved="false"
+            app:entryValues="@array/timeout_ms_value"
+            app:entries="@array/timeout_ms"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+
+
+        <ListPreference
+            app:key="responseHeaders"
+            app:title="Response headers timeout warning"
+            app:iconSpaceReserved="false"
+            app:entryValues="@array/timeout_ms_value"
+            app:entries="@array/timeout_ms"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:key="responseBody"
+            app:title="Response body timeout warning"
+            app:iconSpaceReserved="false"
+            app:entryValues="@array/timeout_ms_value"
+            app:entries="@array/timeout_ms"
+            app:defaultValue="0"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 

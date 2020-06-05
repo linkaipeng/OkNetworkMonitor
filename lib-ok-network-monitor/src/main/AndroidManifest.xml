@@ -18,6 +18,10 @@
             android:theme="@style/PageTheme"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.SettingsActivity"
+            android:theme="@style/PageTheme"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

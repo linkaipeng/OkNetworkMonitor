@@ -1,8 +1,11 @@
 package com.linkaipeng.oknetworkmonitor
 
+import android.content.Context
+
 /**
  * Created by linkaipeng on 2020/6/5.
  *
  */
-class OkNetworkMonitor {
+object OkNetworkMonitor {
+    var context: Context?= null
 }

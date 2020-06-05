@@ -4,6 +4,7 @@ import android.os.SystemClock
 import android.util.Log
 import com.linkaipeng.oknetworkmonitor.data.DataPoolImpl
 import com.linkaipeng.oknetworkmonitor.data.NetworkTraceModel
+import com.linkaipeng.oknetworkmonitor.utils.Utils
 import okhttp3.*
 import java.io.IOException
 import java.net.InetAddress
@@ -128,6 +129,8 @@ class NetworkEventListener : EventListener() {
         super.callEnd(call)
         Log.d(TAG, "callEnd")
         saveEvent(NetworkTraceModel.CALL_END)
+
+        Utils.timeoutChecker(mRequestId)
     }
 
     override fun callFailed(call: Call, ioe: IOException) {
