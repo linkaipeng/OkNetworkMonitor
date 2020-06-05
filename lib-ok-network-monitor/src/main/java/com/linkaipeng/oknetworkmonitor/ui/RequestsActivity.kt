@@ -3,8 +3,9 @@ package com.linkaipeng.oknetworkmonitor.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -30,13 +31,9 @@ class RequestsActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_requests)
-        initToolBar()
+        supportActionBar?.title = "Requests"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initTabLayoutAndViewpager2()
-    }
-
-    private fun initToolBar() {
-        val toolBar: Toolbar = findViewById(R.id.requests_tool_bar)
-        toolBar.setNavigationOnClickListener { finish() }
     }
 
     private fun initTabLayoutAndViewpager2() {
@@ -50,6 +47,21 @@ class RequestsActivity: AppCompatActivity() {
                 1 -> tab.text = "Request Trace"
             }
         }.attach()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.requests, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private class ViewPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity) {

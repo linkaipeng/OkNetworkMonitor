@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,7 +34,6 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
     private TextView mRequestHeadersTextView;
     private TextView mResponseHeadersTextView;
     private TextView mBodyTextView;
-    private View mBackView;
 
     public static void start(Context context, String requestId) {
         Intent starter = new Intent(context, NetworkFeedDetailActivity.class);
@@ -49,13 +49,9 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
         mRequestHeadersTextView = findViewById(R.id.request_headers_textView);
         mResponseHeadersTextView = findViewById(R.id.response_headers_textView);
         mBodyTextView = findViewById(R.id.body_textView);
-        mBackView = findViewById(R.id.feed_detail_back_layout);
-        mBackView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Details");
+
         initData();
     }
 
@@ -137,5 +133,14 @@ public class NetworkFeedDetailActivity extends AppCompatActivity {
         }
 
         return message;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

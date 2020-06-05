@@ -7,14 +7,15 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:supportsRtl="true">
 
         <activity
-            android:name="com.linkaipeng.oknetworkmonitor.ui.NetworkFeedDetailActivity"
+            android:name=".ui.NetworkFeedDetailActivity"
+            android:theme="@style/PageTheme"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".ui.RequestsActivity"
+            android:theme="@style/PageTheme"
             android:screenOrientation="portrait"/>
 
     </application>

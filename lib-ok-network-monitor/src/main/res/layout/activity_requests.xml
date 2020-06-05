@@ -6,17 +6,6 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/requests_tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ToolBar"
-        app:title="Requests"
-        app:titleTextColor="@color/white"
-        app:menu="@menu/requests"
-        app:navigationIcon="@mipmap/ic_back_white"
-        android:background="@color/black"/>
-
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/requests_tab_layout"
