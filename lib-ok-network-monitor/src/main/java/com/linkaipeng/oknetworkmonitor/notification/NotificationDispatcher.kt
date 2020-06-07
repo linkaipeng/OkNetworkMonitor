@@ -6,8 +6,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.JELLY_BEAN
 import android.os.Build.VERSION_CODES.O
+import androidx.core.app.NotificationCompat
 import com.linkaipeng.oknetworkmonitor.R
 
 /**
@@ -17,6 +17,8 @@ import com.linkaipeng.oknetworkmonitor.R
 object NotificationDispatcher {
 
 
+    private const val CHANNEL_ID = "TimeoutNotificationChannel"
+
     fun showNotification(
             context: Context,
             contentTitle: CharSequence,
@@ -24,7 +26,7 @@ object NotificationDispatcher {
             pendingIntent: PendingIntent?,
             notificationId: Int
     ) {
-        val builder = Notification.Builder(context)
+        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentText(contentText)
                 .setContentTitle(contentTitle)
                 .setAutoCancel(true)
@@ -39,31 +41,24 @@ object NotificationDispatcher {
 
     private fun buildNotification(
             context: Context,
-            builder: Notification.Builder
+            builder: NotificationCompat.Builder
     ): Notification {
         builder.setSmallIcon(R.drawable.ic_notification)
                 .setWhen(System.currentTimeMillis())
 
         if (SDK_INT >= O) {
             val channelName = "TimeoutNotification"
-            val channelId = "TimeoutNotificationChannel"
             val notificationManager =
                     context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             var notificationChannel: NotificationChannel? =
-                    notificationManager.getNotificationChannel(channelId)
+                    notificationManager.getNotificationChannel(CHANNEL_ID)
             if (notificationChannel == null) {
-                notificationChannel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+                notificationChannel = NotificationChannel(CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_DEFAULT)
                 notificationManager.createNotificationChannel(notificationChannel)
             }
-            builder.setChannelId(channelId)
+            builder.setChannelId(CHANNEL_ID)
         }
-
-        return if (SDK_INT < JELLY_BEAN) {
-            @Suppress("DEPRECATION")
-            builder.notification
-        } else {
-            builder.build()
-        }
+        return builder.build()
     }
 
 }
