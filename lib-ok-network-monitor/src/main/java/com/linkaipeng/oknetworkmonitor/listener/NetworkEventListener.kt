@@ -129,7 +129,7 @@ class NetworkEventListener : EventListener() {
         super.callEnd(call)
         Log.d(TAG, "callEnd")
         saveEvent(NetworkTraceModel.CALL_END)
-
+        generateTraceData()
         Utils.timeoutChecker(mRequestId)
     }
 
@@ -146,5 +146,21 @@ class NetworkEventListener : EventListener() {
     private fun saveUrl(url: String?) {
         val traceModel = DataPoolImpl.getInstance().getNetworkTraceModel(mRequestId)
         traceModel.url = url
+    }
+
+    private fun generateTraceData() {
+        val traceModel = DataPoolImpl.getInstance().getNetworkTraceModel(mRequestId)
+        val eventsTimeMap = traceModel.networkEventsMap
+
+        val traceList = traceModel.traceItemList
+        traceList[NetworkTraceModel.TRACE_NAME_TOTAL] = Utils.getEventCostTime(eventsTimeMap, NetworkTraceModel.CALL_START, NetworkTraceModel.CALL_END)
+        traceList[NetworkTraceModel.TRACE_NAME_DNS] = Utils.getEventCostTime(eventsTimeMap, NetworkTraceModel.DNS_START, NetworkTraceModel.DNS_END)
+        traceList[NetworkTraceModel.TRACE_NAME_SECURE_CONNECT] = Utils.getEventCostTime(eventsTimeMap, NetworkTraceModel.SECURE_CONNECT_START, NetworkTraceModel.SECURE_CONNECT_END)
+        traceList[NetworkTraceModel.TRACE_NAME_CONNECT] = Utils.getEventCostTime(eventsTimeMap, NetworkTraceModel.CONNECT_START, NetworkTraceModel.CONNECT_END)
+        traceList[NetworkTraceModel.TRACE_NAME_REQUEST_HEADERS] = Utils.getEventCostTime(eventsTimeMap, NetworkTraceModel.REQUEST_HEADERS_START, NetworkTraceModel.REQUEST_HEADERS_END)
+        traceList[NetworkTraceModel.TRACE_NAME_REQUEST_BODY] = Utils.getEventCostTime(eventsTimeMap, NetworkTraceModel.REQUEST_BODY_START, NetworkTraceModel.REQUEST_BODY_END)
+        traceList[NetworkTraceModel.TRACE_NAME_RESPONSE_HEADERS] = Utils.getEventCostTime(eventsTimeMap, NetworkTraceModel.RESPONSE_HEADERS_START, NetworkTraceModel.RESPONSE_HEADERS_END)
+        traceList[NetworkTraceModel.TRACE_NAME_RESPONSE_BODY] = Utils.getEventCostTime(eventsTimeMap, NetworkTraceModel.RESPONSE_BODY_START, NetworkTraceModel.RESPONSE_BODY_END)
+
     }
 }
