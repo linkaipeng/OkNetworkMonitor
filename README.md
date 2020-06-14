@@ -1,61 +1,65 @@
-####   [中文文档](https://github.com/linkaipeng/OkNetworkMonitor/blob/master/README_ZH.md)
+##   [English ReadMe](https://github.com/linkaipeng/OkNetworkMonitor/blob/master/README_EN.md)
+
 
 # OkNetworkMonitor
 
-A network monitor for okHttp base on stetho.
-
-You can view the request header, response header, response body and so on of a network request in your app.
+一个 OKHttp 抓包工具，可以实现在手机上面的抓包，可以方便平时开发中的调试。
 
 
-## Usage
+- 抓包：可以看到 请求头、响应头、响应数据 等；
+- 可复制请求为 CURL 格式，方便调试、协作；
+- 请求全链路耗时监控，并可自定义超时提醒；
 
-### Import the lib to your project.
+
+## 使用
+
+### 导入
 
 `implementation project(':lib-ok-network-monitor')`
 
-### Add a network Interceptor for `OkHttpClient`
+### 抓包
 
 ```
+
 new OkHttpClient.Builder()
     .addNetworkInterceptor(new OkNetworkMonitorInterceptor())
 
 ```
 
-### Entrance
+### 链路监控
 
-#### 1.Start activity
+```
+
+new OkHttpClient.Builder()
+    .eventListenerFactory(NetworkEventListener.Companion.getFACTORY())
+
+```
+
+### 入口
+
+#### 1.跳到抓包页面
 
 ```
 NetworkFeedActivity.start(this);
 ```
 
-#### 2.OR
-
-You can find the entrance in your launcher.
+#### 2.或者桌面快捷入口
 
 <img src="screenshots/screenshot4.png" width=250/>
 
 
-## Screenshots
 
-<img src="screenshots/screenshot1.png" width=300/> <img src="screenshots/screenshot2.png" width=300/> <img src="screenshots/screenshot3.png" width=300/>
+## 截图
+
+### 请求详情，支持复制为 curl 格式
+
+<img src="screenshots/s1.jpg" width=200/> <img src="screenshots/s2.jpg" width=200/> <img src="screenshots/s3.jpg" width=200/>
+
+### 超时提醒，可自定义超时时间，请求链路任意环节超时即可显示通知
+
+<img src="screenshots/s4.jpg" width=200/> <img src="screenshots/s5.jpg" width=200/> <img src="screenshots/s6.jpg" width=200/>
 
 
 ## LICENSE
 
-```
-Copyright 2015 linkaipeng
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-<http://www.apache.org/licenses/LICENSE-2.0>
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-```
+MIT
