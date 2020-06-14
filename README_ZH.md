@@ -1,8 +1,12 @@
 # OkNetworkMonitor
 
-一个基于 stetho 的 OKhttp 抓包工具，可以实现在手机上面的抓包，可以方便平时开发中的调试。
+一个 OKHttp 抓包工具，可以实现在手机上面的抓包，可以方便平时开发中的调试。
 
-目前可以看到 请求头、响应头、响应数据 等，后续还会再增加。
+
+- 抓包：可以看到 请求头、响应头、响应数据 等；
+- 可复制请求为 CURL 格式，方便调试、协作；
+- 请求全链路耗时监控，并可自定义超时提醒；
+
 
 ## 使用
 
@@ -10,13 +14,22 @@
 
 `implementation project(':lib-ok-network-monitor')`
 
-### 添加一个拦截器
+### 抓包
 
 ```
 
 new OkHttpClient.Builder()
     .addNetworkInterceptor(new OkNetworkMonitorInterceptor())
     
+```
+
+### 链路监控
+
+```
+
+new OkHttpClient.Builder()
+    .eventListenerFactory(NetworkEventListener.Companion.getFACTORY())
+
 ```
 
 ### 入口
@@ -35,7 +48,13 @@ NetworkFeedActivity.start(this);
 
 ## 截图
 
-<img src="screenshots/screenshot1.png" width=300/> <img src="screenshots/screenshot2.png" width=300/> <img src="screenshots/screenshot3.png" width=300/>
+### 请求详情，支持复制为 curl 格式
+
+<img src="screenshots/s1.png" width=300/> <img src="screenshots/s2.png" width=300/> <img src="screenshots/s3.png" width=300/>
+
+### 超时提醒，可自定义超时时间，请求链路任意环节超时即可显示通知
+
+<img src="screenshots/s4.png" width=300/> <img src="screenshots/s5.png" width=300/> <img src="screenshots/s6.png" width=300/>
 
 
 ## LICENSE
