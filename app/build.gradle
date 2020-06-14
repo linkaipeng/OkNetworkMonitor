@@ -30,7 +30,9 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:okhttp:4.7.2'
 
-    implementation project(':lib-ok-network-monitor')
+//    implementation project(':lib-ok-network-monitor')
+    implementation 'me.linkaipeng:okNetworkMonitor:1.0.0'
+
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 

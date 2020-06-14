@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
+apply plugin: 'com.novoda.bintray-release'
+
 android {
     compileSdkVersion 28
 
@@ -28,3 +30,11 @@ repositories {
     mavenCentral()
 }
 
+publish {
+    userOrg = 'linkaipeng'
+    groupId = 'me.linkaipeng'
+    artifactId = 'okNetworkMonitor'
+    publishVersion = '1.0.0'
+    desc = ''
+    website = 'https://github.com/linkaipeng/OkNetworkMonitor'
+}
