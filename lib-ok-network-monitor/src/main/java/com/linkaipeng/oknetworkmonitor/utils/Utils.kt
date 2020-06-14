@@ -34,14 +34,14 @@ class Utils {
 
         fun transformToTraceDetail(eventsTimeMap: MutableMap<String, Long>): LinkedHashMap<String, Long> {
             val traceDetailList = linkedMapOf<String, Long>()
-            traceDetailList["Total Time"] = getEventCostTime(eventsTimeMap, NetworkTraceModel.CALL_START, NetworkTraceModel.CALL_END)
-            traceDetailList["DNS"] = getEventCostTime(eventsTimeMap, NetworkTraceModel.DNS_START, NetworkTraceModel.DNS_END)
-            traceDetailList["Secure Connect"] = getEventCostTime(eventsTimeMap, NetworkTraceModel.SECURE_CONNECT_START, NetworkTraceModel.SECURE_CONNECT_END)
-            traceDetailList["Connect"] = getEventCostTime(eventsTimeMap, NetworkTraceModel.CONNECT_START, NetworkTraceModel.CONNECT_END)
-            traceDetailList["Request Headers"] = getEventCostTime(eventsTimeMap, NetworkTraceModel.REQUEST_HEADERS_START, NetworkTraceModel.REQUEST_HEADERS_END)
-            traceDetailList["Request Body"] = getEventCostTime(eventsTimeMap, NetworkTraceModel.REQUEST_BODY_START, NetworkTraceModel.REQUEST_BODY_END)
-            traceDetailList["Response Headers"] = getEventCostTime(eventsTimeMap, NetworkTraceModel.RESPONSE_HEADERS_START, NetworkTraceModel.RESPONSE_HEADERS_END)
-            traceDetailList["Response Body"] = getEventCostTime(eventsTimeMap, NetworkTraceModel.RESPONSE_BODY_START, NetworkTraceModel.RESPONSE_BODY_END)
+            traceDetailList[NetworkTraceModel.TRACE_NAME_TOTAL] = getEventCostTime(eventsTimeMap, NetworkTraceModel.CALL_START, NetworkTraceModel.CALL_END)
+            traceDetailList[NetworkTraceModel.TRACE_NAME_DNS] = getEventCostTime(eventsTimeMap, NetworkTraceModel.DNS_START, NetworkTraceModel.DNS_END)
+            traceDetailList[NetworkTraceModel.TRACE_NAME_SECURE_CONNECT] = getEventCostTime(eventsTimeMap, NetworkTraceModel.SECURE_CONNECT_START, NetworkTraceModel.SECURE_CONNECT_END)
+            traceDetailList[NetworkTraceModel.TRACE_NAME_CONNECT] = getEventCostTime(eventsTimeMap, NetworkTraceModel.CONNECT_START, NetworkTraceModel.CONNECT_END)
+            traceDetailList[NetworkTraceModel.TRACE_NAME_REQUEST_HEADERS] = getEventCostTime(eventsTimeMap, NetworkTraceModel.REQUEST_HEADERS_START, NetworkTraceModel.REQUEST_HEADERS_END)
+            traceDetailList[NetworkTraceModel.TRACE_NAME_REQUEST_BODY] = getEventCostTime(eventsTimeMap, NetworkTraceModel.REQUEST_BODY_START, NetworkTraceModel.REQUEST_BODY_END)
+            traceDetailList[NetworkTraceModel.TRACE_NAME_RESPONSE_HEADERS] = getEventCostTime(eventsTimeMap, NetworkTraceModel.RESPONSE_HEADERS_START, NetworkTraceModel.RESPONSE_HEADERS_END)
+            traceDetailList[NetworkTraceModel.TRACE_NAME_RESPONSE_BODY] = getEventCostTime(eventsTimeMap, NetworkTraceModel.RESPONSE_BODY_START, NetworkTraceModel.RESPONSE_BODY_END)
             return traceDetailList
         }
 
@@ -67,28 +67,25 @@ class Utils {
             val traceItemList = networkTraceModel.traceItemList
             val url = networkTraceModel.url
 
-            check("wholeRequest", url, traceItemList[NetworkTraceModel.TRACE_NAME_TOTAL])
-            check("dns", url, traceItemList[NetworkTraceModel.TRACE_NAME_DNS])
-            check("secureConnect", url, traceItemList[NetworkTraceModel.TRACE_NAME_SECURE_CONNECT])
-            check("connect", url, traceItemList[NetworkTraceModel.TRACE_NAME_CONNECT])
-            check("requestHeaders", url, traceItemList[NetworkTraceModel.TRACE_NAME_REQUEST_HEADERS])
-            check("requestBody", url, traceItemList[NetworkTraceModel.TRACE_NAME_REQUEST_BODY])
-            check("responseHeaders", url, traceItemList[NetworkTraceModel.TRACE_NAME_RESPONSE_HEADERS])
-            check("responseBody", url, traceItemList[NetworkTraceModel.TRACE_NAME_RESPONSE_BODY])
+            check(NetworkTraceModel.TRACE_NAME_TOTAL, url, traceItemList)
+            check(NetworkTraceModel.TRACE_NAME_DNS, url, traceItemList)
+            check(NetworkTraceModel.TRACE_NAME_SECURE_CONNECT, url, traceItemList)
+            check(NetworkTraceModel.TRACE_NAME_CONNECT, url, traceItemList)
+            check(NetworkTraceModel.TRACE_NAME_REQUEST_HEADERS, url, traceItemList)
+            check(NetworkTraceModel.TRACE_NAME_REQUEST_BODY, url, traceItemList)
+            check(NetworkTraceModel.TRACE_NAME_RESPONSE_HEADERS, url, traceItemList)
+            check(NetworkTraceModel.TRACE_NAME_RESPONSE_BODY, url, traceItemList)
         }
 
-        private fun check(key: String, url: String?, costTime: Long?) {
+        private fun check(key: String, url: String?, traceItemList: MutableMap<String, Long>) {
             val context = OkNetworkMonitor.context
             if (context == null) {
                 Log.d("OkNetworkMonitor", "context is null.")
                 return
             }
-            val value = getSettingTimeout(context, key)
-            if (value <= 0 || costTime == null) {
-                return
-            }
 
-            if (costTime > value) {
+            val costTime = traceItemList[key]
+            if (isTimeout(context, key, costTime)) {
                 val title = "Timeout warning. $key cost ${costTime}ms."
                 val content = "url: $url"
                 val intent = Intent(context, RequestsActivity::class.java)
@@ -96,6 +93,14 @@ class Utils {
                 NotificationDispatcher.showNotification(context, title, content,
                         pendingIntent, notificationId.getAndIncrement())
             }
+        }
+
+        fun isTimeout(context: Context, key: String, costTime: Long?): Boolean {
+            val value = getSettingTimeout(context, key)
+            if (value <= 0 || costTime == null) {
+                return false
+            }
+            return costTime > value
         }
 
         private fun getSettingTimeout(context: Context, key: String): Int {

@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import com.linkaipeng.oknetworkmonitor.R
+import com.linkaipeng.oknetworkmonitor.utils.Utils
 
 /**
  * Created by linkaipeng on 2020/6/4.
@@ -36,6 +38,17 @@ class TraceView(context: Context?, attr: AttributeSet?): LinearLayout(context, a
         } else {
             lineView.visibility = View.VISIBLE
         }
+
+        if (!name.isNullOrEmpty() && Utils.isTimeout(context, name, costTime)) {
+            pointView.setBackgroundResource(R.drawable.red_trace)
+            traceTextView.setTextColor(ResourcesCompat.getColor(resources,
+                    R.color.red, null))
+        } else {
+            pointView.setBackgroundResource(R.drawable.green_trace)
+            traceTextView.setTextColor(ResourcesCompat.getColor(resources,
+                    R.color.trace_normal, null))
+        }
+
         addView(itemView)
     }
 }

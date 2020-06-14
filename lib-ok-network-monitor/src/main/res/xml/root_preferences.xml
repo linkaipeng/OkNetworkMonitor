@@ -6,7 +6,7 @@
         app:summary="Notification will be displayed when action timeout.">
 
         <ListPreference
-            app:key="wholeRequest"
+            app:key="Total Time"
             app:allowDividerAbove="true"
             app:title="Whole Request timeout warning"
             app:iconSpaceReserved="false"
@@ -16,7 +16,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:key="dns"
+            app:key="DNS"
             app:title="DNS timeout warning"
             app:iconSpaceReserved="false"
             app:entryValues="@array/timeout_ms_value"
@@ -25,7 +25,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:key="secureConnect"
+            app:key="Secure Connect"
             app:title="SecureConnect timeout warning"
             app:iconSpaceReserved="false"
             app:entryValues="@array/timeout_ms_value"
@@ -34,7 +34,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:key="connect"
+            app:key="Connect"
             app:title="Connect timeout warning"
             app:iconSpaceReserved="false"
             app:entryValues="@array/timeout_ms_value"
@@ -43,7 +43,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:key="requestHeaders"
+            app:key="Request Headers"
             app:title="Request headers timeout warning"
             app:iconSpaceReserved="false"
             app:entryValues="@array/timeout_ms_value"
@@ -52,7 +52,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:key="requestBody"
+            app:key="Request Body"
             app:title="Request body timeout warning"
             app:iconSpaceReserved="false"
             app:entryValues="@array/timeout_ms_value"
@@ -62,7 +62,7 @@
 
 
         <ListPreference
-            app:key="responseHeaders"
+            app:key="Response Headers"
             app:title="Response headers timeout warning"
             app:iconSpaceReserved="false"
             app:entryValues="@array/timeout_ms_value"
@@ -71,7 +71,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:key="responseBody"
+            app:key="Response Body"
             app:title="Response body timeout warning"
             app:iconSpaceReserved="false"
             app:entryValues="@array/timeout_ms_value"
