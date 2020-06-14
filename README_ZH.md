@@ -50,11 +50,11 @@ NetworkFeedActivity.start(this);
 
 ### 请求详情，支持复制为 curl 格式
 
-<img src="screenshots/s1.png" width=300/> <img src="screenshots/s2.png" width=300/> <img src="screenshots/s3.png" width=300/>
+<img src="screenshots/s1.jpg" width=300/> <img src="screenshots/s2.jpg" width=300/> <img src="screenshots/s3.jpg" width=300/>
 
 ### 超时提醒，可自定义超时时间，请求链路任意环节超时即可显示通知
 
-<img src="screenshots/s4.png" width=300/> <img src="screenshots/s5.png" width=300/> <img src="screenshots/s6.png" width=300/>
+<img src="screenshots/s4.jpg" width=300/> <img src="screenshots/s5.jpg" width=300/> <img src="screenshots/s6.jpg" width=300/>
 
 
 ## LICENSE
