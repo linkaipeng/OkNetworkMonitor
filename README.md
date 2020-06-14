@@ -15,7 +15,7 @@
 
 ### 导入
 
-`implementation project(':lib-ok-network-monitor')`
+`implementation 'me.linkaipeng:okNetworkMonitor:1.0.0'`
 
 ### 抓包
 

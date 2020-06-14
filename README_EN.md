@@ -12,7 +12,7 @@ A network monitor for okHttp.
 
 ### Import the lib to your project.
 
-`implementation project(':lib-ok-network-monitor')`
+`implementation 'me.linkaipeng:okNetworkMonitor:1.0.0'`
 
 ### Add a network Interceptor for `OkHttpClient`
 
